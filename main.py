@@ -1,4 +1,4 @@
-import vk, requests, json, requests as r
+import vk, requests as r, json
 from grab import Grab
 
 token=''
@@ -13,7 +13,7 @@ content = g.doc.select('//div[@class="content-box"]//meta/@content').text()
 imgurl = g.doc.select('//div[@class="photo"]//img/@src').text()
 
 print("Получение изображения...")
-pic = requests.get(imgurl)
+pic = r.get(imgurl)
 picname = "postpic.jpg"
 out = open('{}'.format(picname), "wb")
 out.write(pic.content)
@@ -39,7 +39,7 @@ response = json.loads(resp.text)
 print('Сохранение изображения...')
 method_url = 'https://api.vk.com/method/photos.saveWallPhoto?'
 data = dict(access_token=token, gid=groupid, photo=response['photo'], hash=response['hash'], server=response['server'])
-response = requests.post(method_url, data)
+response = r.post(method_url, data)
 result = json.loads(response.text)['response'][0]['id']
 api.wall.post(owner_id="-{}".format(groupid), message=msg, from_group=1, signed=1, attachment=result)
 print('Готово!')
