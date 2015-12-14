@@ -1,5 +1,4 @@
-import vk, requests, json
-import requests as r
+import vk, requests, json, requests as r
 from grab import Grab
 
 token=''
