@@ -25,6 +25,7 @@ msg = headline + ". \n" + "\n" + content
 print("Логин VK...")
 session = vk.AuthSession(access_token=token)
 api = vk.API(session)
+api.stats.trackVisitor()
 
 print("Выгрузка изображения...")
 upload = api.photos.getWallUploadServer(group_id=groupid)
